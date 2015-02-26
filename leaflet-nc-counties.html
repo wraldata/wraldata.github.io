@@ -25,7 +25,7 @@
 					&lt;div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; max-height: 500px;">&amp;#160;&lt;/div&gt;
 				</code>
 				<br />
-				<p style="margin-top:20px;">Don't forget to enable embed on all platforms</p>
+				<p style="margin-top:20px;"><b>Important: </b>Don't forget to enable embed on all platforms</p>
 
 				<h4 style="margin-top:20px;">RequireJS Module</h4>
 				<pre>
@@ -35,7 +35,8 @@ require([
         'leaflet'
 ], function ($, g_config, leaflet) {
         leaflet.done(function (L) {
-        //INITIALIZE LEAFLET MAP
+        
+        //Initialize map
         var map = new L.Map('leaflet-map', {
                 center: new L.LatLng(35.1779935, -79.7731005),
                 zoom: 7,
@@ -58,6 +59,7 @@ require([
                                 style: countyStyle
                         }).addTo(map);
 
+                        //Set color scheme or insert if statement
                         function countyStyle(feature) {
                                 return {
                                         "color": '#2594e3',
