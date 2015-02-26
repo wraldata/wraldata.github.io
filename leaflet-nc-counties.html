@@ -50,7 +50,7 @@
         //remove tile attribution
         map.attributionControl.setPrefix('');
 
-        var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&version=jsonObj');
+        var counties = $.get('http://www.wral.com/news/state/data_set/14027694/?dsi_id=NC%2BCounties&version=jsonObj');
 
         var countyLayer;
         countyLayer = L.geoJson(counties, {
