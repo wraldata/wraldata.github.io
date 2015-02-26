@@ -29,11 +29,10 @@ require([
 ], function ($, g_config, leaflet) {
 	leaflet.done(function (L) {
 		var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&amp;version=jsonObj');
-		$.when(counties)
-            .done(function (countiesResponse) {
-            	var counties = countiesResponse[0];
-            	run(markers, counties);
-        });
+		$.when(counties).done(function (countiesResponse) {
+			var counties = countiesResponse[0];
+			run(markers, counties);
+		});
 	});
 });
 				</pre>
