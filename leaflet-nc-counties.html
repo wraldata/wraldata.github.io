@@ -50,7 +50,7 @@
         //remove tile attribution
         map.attributionControl.setPrefix('');
 
-        var counties = $.get('/data/nc-counties.json',function(data){
+        $.get('/data/nc-counties.json',function(counties){
         	var countyLayer;
         	countyLayer = L.geoJson(counties, {
         		style: countyStyle
