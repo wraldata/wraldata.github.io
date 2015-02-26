@@ -20,64 +20,56 @@
 				<h4 style="margin-top:20px;">CSS requirements</h4>
 				<code>vendor/leaflet/leaflet</code>
 
-				<h4 style="margin-top:20px;">RequireJS Module</h4>
-				<pre>
-require([
-	'jquery',
-	'g_config',
-	'leaflet'
-], function ($, g_config, leaflet) {
-	leaflet.done(function (L) {
-		var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&amp;version=jsonObj');
-		$.when(counties).done(function (countiesResponse) {
-			var counties = countiesResponse[0];
-			run(counties);
-		});
-		var run = function (counties) {
-			//INITIALIZE LEAFLET MAP
-			var map = new L.Map('leaflet-map', {
-				center: new L.LatLng(35.1779935, -79.7731005),
-				zoom: 7,
-				scrollWheelZoom: false,
-				zoomControl: false
-			});
-
-			L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-				maxZoom: 13,
-			}).addTo(map);
-
-			//remove user pan option
-			map.dragging.disable();
-
-			//remove tile attribution
-			map.attributionControl.setPrefix('');
-
-			//Load the county layer
-			var countyLayer;
-			countyLayer = L.geoJson(counties, {
-				style: countyStyle
-			}).addTo(map);
-
-			//Defines the style for your counties
-			function countyStyle(feature) {
-				return {
-					"color": '#2594e3',
-					"weight": 3,
-					"opacity": 0.1,
-					"fillOpacity": 0.30
-				}
-			}
-		}
-	});
-});
-				</pre>
-
 				<h4 style="margin-top:20px;">Embed tag</h4>
 				<code>
 					&lt;div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; max-height: 500px;">&amp;#160;&lt;/div&gt;
 				</code>
 				<br />
 				<p style="margin-top:20px;">Don't forget to enable embed on all platforms</p>
+
+				<h4 style="margin-top:20px;">RequireJS Module</h4>
+				<pre>
+require([
+        'jquery',
+        'g_config',
+        'leaflet'
+], function ($, g_config, leaflet) {
+        leaflet.done(function (L) {
+        //INITIALIZE LEAFLET MAP
+        var map = new L.Map('leaflet-map', {
+                center: new L.LatLng(35.1779935, -79.7731005),
+                zoom: 7,
+                scrollWheelZoom: false,
+                zoomControl: false
+        });
+
+        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+                maxZoom: 13,
+        }).addTo(map);
+
+        //remove user pan option
+        map.dragging.disable();
+
+        //remove tile attribution
+        map.attributionControl.setPrefix('');
+                $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&version=jsonObj',function(counties){
+                        var countyLayer;
+                        countyLayer = L.geoJson(counties, {
+                                style: countyStyle
+                        }).addTo(map);
+
+                        function countyStyle(feature) {
+                                return {
+                                        "color": '#2594e3',
+                                        "weight": 3,
+                                        "opacity": 0.1,
+                                        "fillOpacity": 0.30
+                                }
+                        }
+                });
+        });
+});
+				</pre>
 			</div>
 		</div>
 	</div>
