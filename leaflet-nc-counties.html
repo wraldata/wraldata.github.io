@@ -14,18 +14,28 @@
 				<h2 style="margin-top:20px;">Mapping NC counties with Leaflet</h2>
 
 				<!-- BEGIN LEAFLET MAP -->
-				<div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; margin-top: 10px; margin-bottom: 5px; max-height: 500px;">&#160;</div>
+				<div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; margin-top: 10px; margin-bottom: 10px; max-height: 500px;">&#160;</div>
 				<!-- END LEAFLET MAP -->
 
 				<h4>CSS requirements</h4>
 				<code>vendor/leaflet/leaflet</code>
 
 				<h4>RequireJS Module</h4>
-				<code>code here</code>
+				<code>
+					require([
+						'jquery',
+						'g_config',
+						'leaflet'
+					], function ($, g_config, leaflet) {
+						leaflet.done(function (L) {
+							var markers = $.get('/news/state/data_set/14027694/?dsi_id=marker-data-1011&amp;version=jsonObj');
+						});
+					});
+				</code>
 
 				<h4>Embed tag</h4>
 				<code>
-					&lt;div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; margin-top: 10px; margin-bottom: 5px; max-height: 500px;">&amp;#160;&lt;/div&gt;
+					&lt;div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; max-height: 500px;">&amp;#160;&lt;/div&gt;
 				</code>
 				<br />
 				<p style="margin-top:20px;">Don't forget to enable embed on all platforms</p>
