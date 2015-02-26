@@ -17,23 +17,28 @@
 				<div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; margin-top: 10px; margin-bottom: 10px; max-height: 500px;">&#160;</div>
 				<!-- END LEAFLET MAP -->
 
-				<h4>CSS requirements</h4>
+				<h4 style="margin-top:20px;">CSS requirements</h4>
 				<code>vendor/leaflet/leaflet</code>
 
-				<h4>RequireJS Module</h4>
-				<code>
+				<h4 style="margin-top:20px;">RequireJS Module</h4>
+				<pre>
 					require([<br />
 						&emsp;'jquery',<br />
 						&emsp;'g_config',<br />
 						&emsp;'leaflet'<br />
 					], function ($, g_config, leaflet) {<br />
 						&emsp;leaflet.done(function (L) {<br />
-							&emsp;&emsp;var markers = $.get('/news/state/data_set/14027694/?dsi_id=marker-data-1011&amp;version=jsonObj');<br />
+							&emsp;&emsp;var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&amp;version=jsonObj');<br />
+							&emsp;&emsp;$.when(counties){<br />
+            				&emsp;&emsp;&emsp;.done(function (countiesResponse) {{<br />
+            				&emsp;&emsp;&emsp;&emsp;var counties = countiesResponse[0];{<br />
+            				&emsp;&emsp;&emsp;&emsp;run(markers, counties);{<br />
+            				&emsp;&emsp;&emsp;});{<br />
 						&emsp;});<br />
 					});<br />
-				</code>
+				</pre>
 
-				<h4>Embed tag</h4>
+				<h4 style="margin-top:20px;">Embed tag</h4>
 				<code>
 					&lt;div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; max-height: 500px;">&amp;#160;&lt;/div&gt;
 				</code>
