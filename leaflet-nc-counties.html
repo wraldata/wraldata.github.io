@@ -1,0 +1,36 @@
+<head>
+	<title>Mapping NC counties with leaflet</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CDroid+Sans:400,700%7CArvo:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/main.min.css?v=20150223a">
+	<link rel="stylesheet" href="/libraries/leaflet/leaflet.css" />
+	<script src="/libraries/leaflet/leaflet.js"></script>
+</head>
+<body class="wral">
+	<div class="g-wrap">
+		<div class="container">
+			<div class="1-default">
+				<p>CSS requirements</p>
+				<p>vendor/leaflet/leaflet</p>
+
+			</div>
+		</div>
+	</div>
+
+	<script>
+		//INITIALIZE LEAFLET MAP
+        var map = new L.Map('leaflet-map', {
+        	center: new L.LatLng(35.1779935, -79.7731005),
+        	zoom: 7,
+        	scrollWheelZoom: false,
+        	zoomControl: false
+        });
+
+        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+        	maxZoom: 13,
+        }).addTo(map);
+        //remove user pan option
+        map.dragging.disable();
+        //remove tile attribution
+        map.attributionControl.setPrefix('');
+	</script>
+</body>
