@@ -22,20 +22,20 @@
 
 				<h4 style="margin-top:20px;">RequireJS Module</h4>
 				<pre>
-					require([<br />
-						&emsp;'jquery',<br />
-						&emsp;'g_config',<br />
-						&emsp;'leaflet'<br />
-					], function ($, g_config, leaflet) {<br />
-						&emsp;leaflet.done(function (L) {<br />
-							&emsp;&emsp;var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&amp;version=jsonObj');<br />
-							&emsp;&emsp;$.when(counties){<br />
-            				&emsp;&emsp;&emsp;.done(function (countiesResponse) {{<br />
-            				&emsp;&emsp;&emsp;&emsp;var counties = countiesResponse[0];{<br />
-            				&emsp;&emsp;&emsp;&emsp;run(markers, counties);{<br />
-            				&emsp;&emsp;&emsp;});{<br />
-						&emsp;});<br />
-					});<br />
+					require([
+						'jquery',
+						'g_config',
+						'leaflet'
+					], function ($, g_config, leaflet) {
+						leaflet.done(function (L) {
+							var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&amp;version=jsonObj');
+							$.when(counties)
+            					.done(function (countiesResponse) {
+            						var counties = countiesResponse[0];
+            						run(markers, counties);
+            				});
+						});
+					});
 				</pre>
 
 				<h4 style="margin-top:20px;">Embed tag</h4>
