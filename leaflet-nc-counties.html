@@ -23,8 +23,10 @@
 				<code>code here</code>
 
 				<h4>Embed tag</h4>
-				<code>code here</code>
-
+				<code>
+					<div id="leaflet-map" class="breakpoint-tablet-and-desktop-only" style="width: 100%; margin-top: 10px; margin-bottom: 5px; max-height: 400px;">&#160;</div>
+				</code>
+				<br />
 				<p>Don't forget to enable embed on all platforms</p>
 
 			</div>
@@ -47,5 +49,21 @@
         map.dragging.disable();
         //remove tile attribution
         map.attributionControl.setPrefix('');
+
+        var counties = $.get('/news/state/data_set/14027694/?dsi_id=NC%2BCounties&version=jsonObj');
+
+        var countyLayer;
+        countyLayer = L.geoJson(counties, {
+        	style: countyStyle
+        }).addTo(map);
+
+        function countyStyle(feature) {
+        	return {
+        		"color": '#2594e3',
+        		"weight": 3,
+        		"opacity": 0.1,
+        		"fillOpacity": 0.30
+        	}
+        }
 	</script>
 </body>
