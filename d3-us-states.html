@@ -472,7 +472,7 @@ require(
     .attr("viewBox","0 0 " + width + " " + height)
     .attr("preserveAspectRatio","xMinYMin");
 
-    d3.json("/news/national_world/data_set/14437972/?dsi_id=states&version=jsonObj", function(error, us) {
+    d3.json("https://wral.com/news/national_world/data_set/14437972/?dsi_id=states&version=jsonObj", function(error, us) {
       svg.selectAll(".us_state")
       .data(topojson.feature(us, us.objects.states).features)
       .enter().append("path")
@@ -496,7 +496,7 @@ require(
     });
 
     //workaround for making sure path appears on top
-    $.fn.d3Click = function () {
+    jQuery.fn.d3Click = function () {
       this.each(function (i, e) {
         var evt = document.createEvent("MouseEvents");
         evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
