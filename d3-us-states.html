@@ -330,36 +330,5 @@ require(
 	</div>
 
 	<script>
-		//INITIALIZE LEAFLET MAP
-        var map = new L.Map('leaflet-map', {
-        	center: new L.LatLng(35.1779935, -79.7731005),
-        	zoom: 7,
-        	scrollWheelZoom: false,
-        	zoomControl: false
-        });
-
-        L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-        	maxZoom: 13,
-        }).addTo(map);
-        //remove user pan option
-        map.dragging.disable();
-        //remove tile attribution
-        map.attributionControl.setPrefix('');
-
-        $.get('/data/nc-counties.json',function(counties){
-        	var countyLayer;
-        	countyLayer = L.geoJson(counties, {
-        		style: countyStyle
-        	}).addTo(map);
-
-        	function countyStyle(feature) {
-        		return {
-        			"color": '#2594e3',
-        			"weight": 3,
-        			"opacity": 0.1,
-        			"fillOpacity": 0.30
-        		}
-        	}
-        });
 	</script>
 </body>
