@@ -154,7 +154,7 @@
 
 				<p style="clear:both;">A basic, clean D3 map for applications and illustrations about the U.S. using state shapefiles.</p>
 
-                                <p>Click a state and pull data from a related JSON file</p>
+                                <p>Click a state and pull data from a related JSON file. This choropeth version colors states according to predefined categories.</p>
 
                                 <p><b>TODO:</b> Fix path stacking order on click/hover.</p>
 
@@ -550,10 +550,6 @@ require(
                   console.log("ERROR: no color category")
                   break;
               }
-            }
-            var i = 0;
-            while(stats[i].State != state_display){
-              i++;
             }
           }
     }
