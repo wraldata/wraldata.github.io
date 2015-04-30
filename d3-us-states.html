@@ -447,5 +447,141 @@ require(
 	</div>
 
 	<script>
+        var state = "North_Carolina";
+    var stats;
+    var state_display = "North Carolina";
+
+    //initial height and width recalculated
+    var width = 600,
+    height = 600;
+
+    var projection = d3.geo.albersUsa()
+    .scale(820)
+    .translate([300,190]);
+
+    var path = d3.geo.path()
+    .projection(projection);
+
+    //resizing from here: http://stackoverflow.com/questions/20885164/how-to-create-a-responsive-map-using-d3
+    var svg = d3.select("#map")
+    .append("div")
+    .attr("id","svg")
+    .append("div")
+    .attr("class","map_container")
+    .append("svg")
+    .attr("viewBox","0 0 " + width + " " + height)
+    .attr("preserveAspectRatio","xMinYMin");
+
+    d3.json("/news/national_world/data_set/14437972/?dsi_id=states&version=jsonObj", function(error, us) {
+      svg.selectAll(".us_state")
+      .data(topojson.feature(us, us.objects.states).features)
+      .enter().append("path")
+      .attr("class", function(d) {
+        if(d.properties.name == "North Carolina"){return "us_state " + d.properties.name + " selected"}
+          else if(d.properties.name == "Puerto Rico"){return "hidden"}
+            else{return "us_state"}
+          })
+      .attr("id", function(d) {return d.properties.name.split(' ').join('_')})
+      .attr("d", path)
+      .on("click", function(d) {
+        d3.selectAll(".selected").classed("selected", false);
+        d3.select(this).classed("selected", true);
+        svg.selectAll("path").sort(function (a, b) { // select the parent and sort the path's
+        if (a.id != d.id) return -1;               // a is not the hovered element, send "a" to the back
+        else return 1;                             // a is the hovered element, bring "a" to the front
+      });
+      });
+      run_rural();
+      bindClicks();
+    });
+
+    //workaround for making sure path appears on top
+    jQuery.fn.d3Click = function () {
+      this.each(function (i, e) {
+        var evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent("click", true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+        e.dispatchEvent(evt);
+      });
+    };
+
+    function run_rural(){
+      var rural_stats = (function(){
+        $.ajax({
+          'async': true,
+          'global': false,
+          'url': 'news/national_world/data_set/14614951/?dsi_id=rural-hospitals&version=jsonObj',
+          'dataType': "json",
+          'success': function (data) {
+            rural_stats = data;
+            stats = rural_stats;
+            parseData();
+          }
+        });
+        return rural_stats;
+      })();
+    }
+
+    function parseData(){
+      for (j=0; j < stats.length; j++){
+            vulnerable = parseFloat(stats[j]['Percent Vulnerable']);
+            id_name = '#'+stats[j].State.replace(/ /g,"_");
+            if (id_name == "#DC"){
+              //ignore because there's no visible shapefile
+            }
+            else {
+              switch (true){
+                case (vulnerable < 3 ):
+                  $(id_name).css('fill','#eff3ff');
+                  break;
+                case (vulnerable >= 3 && vulnerable < 7 ):
+                  $(id_name).css('fill','#deebf7');
+                  break;
+                case (vulnerable >= 7 && vulnerable < 18 ):
+                  $(id_name).css('fill','#9ecae1');
+                  break;
+                case (vulnerable >= 18 ):
+                  $(id_name).css('fill','#3182bd');
+                  break;
+                default:
+                  console.log("ERROR: no color category")
+                  break;
+              }
+            }
+            var i = 0;
+            while(stats[i].State != state_display){
+              i++;
+            }
+          }
+    }
+
+    //Event listeners for clicking path and select bar
+    function bindClicks(){
+      $('path').click(function(e){
+        e.preventDefault();
+        state = $(this).attr('id');
+        state_display = state.replace(/_/g," ");
+        $('#state_select').val(state_display);
+        var i = 0;
+        while(stats[i].State != state_display){
+          i++;
+        }
+        document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+      });
+    }
+
+    $('#state_select').change(function(e){
+      e.preventDefault();
+      state_display = $(this).val();
+      state = state_display.replace(/ /g,"_");
+      var i = 0;
+      while(stats[i].State != state_display){
+        i++;
+      }
+      $('path').attr('class','us_state');
+      $('#'+ state).attr('class','us_state selected');
+      document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+      //Invoke d3 command for making sure path is properly shaded
+      $('#'+state).d3Click();
+    });
 	</script>
 </body>
