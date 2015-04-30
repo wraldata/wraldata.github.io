@@ -147,7 +147,7 @@
                                                         </div>
                                                 </div>
                                                 <div>
-                                                        <h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Variable: <span style="color:#333;"><span id="vulnerable">6.45</span>%</span></h4>
+                                                        <h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Variable: <span style="color:#333;"><span id="variable">6.45</span>%</span></h4>
                                                 </div>
                                         </div>
                                 </div>
@@ -280,7 +280,7 @@ img#icon_inactive {
         &lt;div style="margin:0;">
                 &lt;div style="margin:0;padding-top:0px;display:block;">
                         &lt;div style="float:right;padding-bottom:30px;">
-                                &lt;div style="text-align:center;text-transform:uppercase;font-size:12px;padding:0;">% vulnerable&lt;/div>
+                                &lt;div style="text-align:center;text-transform:uppercase;font-size:12px;padding:0;">Legend&lt;/div>
                                 &lt;div>
                                         &lt;div class="maplegend" style="background-color:#3182bd;">&lt;br />18+&lt;/div>
                                         &lt;div class="maplegend" style="background-color:#9ecae1;">&lt;br />7-18&lt;/div>
@@ -290,7 +290,7 @@ img#icon_inactive {
                         &lt;/div>
                 &lt;/div>
                 &lt;div>
-                        &lt;h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Vulnerable: &lt;span style="color:#333;">&lt;span id="vulnerable">6.45&lt;/span>%&lt;/span>&lt;/h4>
+                        &lt;h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Variable: &lt;span style="color:#333;">&lt;span id="variable">6.45&lt;/span>%&lt;/span>&lt;/h4>
 
 &lt;/div>
                                 </pre>
@@ -380,33 +380,29 @@ require(
 
     function parseData(){
       for (j=0; j < stats.length; j++){
-            vulnerable = parseFloat(stats[j]['Percent Vulnerable']);
+            variable = parseFloat(stats[j]['Percent Vulnerable']);
             id_name = '#'+stats[j].State.replace(/ /g,"_");
             if (id_name == "#DC"){
               //ignore because there's no visible shapefile
             }
             else {
               switch (true){
-                case (vulnerable < 3 ):
+                case (variable < 3 ):
                   $(id_name).css('fill','#eff3ff');
                   break;
-                case (vulnerable >= 3 && vulnerable < 7 ):
+                case (variable >= 3 && variable < 7 ):
                   $(id_name).css('fill','#deebf7');
                   break;
-                case (vulnerable >= 7 && vulnerable < 18 ):
+                case (variable >= 7 && variable < 18 ):
                   $(id_name).css('fill','#9ecae1');
                   break;
-                case (vulnerable >= 18 ):
+                case (variable >= 18 ):
                   $(id_name).css('fill','#3182bd');
                   break;
                 default:
                   console.log("ERROR: no color category")
                   break;
               }
-            }
-            var i = 0;
-            while(stats[i].State != state_display){
-              i++;
             }
           }
     }
@@ -422,7 +418,7 @@ require(
         while(stats[i].State != state_display){
           i++;
         }
-        document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+        document.getElementById("variable").innerHTML = stats[i]['Percent Vulnerable'];
       });
     }
 
@@ -436,7 +432,7 @@ require(
       }
       $('path').attr('class','us_state');
       $('#'+ state).attr('class','us_state selected');
-      document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+      document.getElementById("variable").innerHTML = stats[i]['Percent Vulnerable'];
       //Invoke d3 command for making sure path is properly shaded
       $('#'+state).d3Click();
     });
@@ -527,23 +523,23 @@ require(
 
     function parseData(){
       for (j=0; j < stats.length; j++){
-            vulnerable = parseFloat(stats[j]['Percent Vulnerable']);
+            variable = parseFloat(stats[j]['Percent Vulnerable']);
             id_name = '#'+stats[j].State.replace(/ /g,"_");
             if (id_name == "#DC"){
               //ignore because there's no visible shapefile
             }
             else {
               switch (true){
-                case (vulnerable < 3 ):
+                case (variable < 3 ):
                   $(id_name).css('fill','#eff3ff');
                   break;
-                case (vulnerable >= 3 && vulnerable < 7 ):
+                case (variable >= 3 && variable < 7 ):
                   $(id_name).css('fill','#deebf7');
                   break;
-                case (vulnerable >= 7 && vulnerable < 18 ):
+                case (variable >= 7 && variable < 18 ):
                   $(id_name).css('fill','#9ecae1');
                   break;
-                case (vulnerable >= 18 ):
+                case (variable >= 18 ):
                   $(id_name).css('fill','#3182bd');
                   break;
                 default:
@@ -565,7 +561,7 @@ require(
         while(stats[i].State != state_display){
           i++;
         }
-        document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+        document.getElementById("variable").innerHTML = stats[i]['Percent Vulnerable'];
       });
     }
 
@@ -579,7 +575,7 @@ require(
       }
       $('path').attr('class','us_state');
       $('#'+ state).attr('class','us_state selected');
-      document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
+      document.getElementById("variable").innerHTML = stats[i]['Percent Vulnerable'];
       //Invoke d3 command for making sure path is properly shaded
       $('#'+state).d3Click();
     });
