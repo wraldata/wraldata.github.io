@@ -8,9 +8,67 @@
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
 	<style>
 	pre, code {
-		padding: 5px;
+                padding: 5px;
 		background-color: #e9e9e9;
 	}
+        .us_state {
+                fill:#f7f7f7;
+                stroke:#a6a8ab;
+                stroke-width:1;
+        }
+        .us_state:hover {
+                stroke-width:3;
+        }
+        .selected {
+                stroke-width:3;
+                /*stroke:#6b6b6b;*/
+        }
+        select#state_select {
+                height:40px;
+                font-weight: bold;
+                font-size: 16px;
+        }
+        #svg {
+                width:100%;
+                max-height: 100%;
+        }
+        svg {
+                position: absolute;
+                top: 0;
+                left: 0;
+        }
+        .map_container {
+                height: 0;
+                padding-top: 65%;
+                position: relative;
+        }
+        .maplegend {
+                border:0;
+                padding:0;
+                text-align: center;
+                font-size:12px;
+                float:right;
+                width:30px;
+                height:15px;
+                border-top:1px solid #a6a8ab;
+                border-bottom:1px solid #a6a8ab;
+        }
+        .maplegend-a {
+                border:0;
+                padding:0;
+                text-align: center;
+                font-size:12px;
+                float:right;
+                width:30px;
+                height:15px;
+                border-top:1px solid #a6a8ab;
+                border-left:1px solid #a6a8ab;
+                border-bottom:1px solid #a6a8ab;
+        }
+        img#icon_inactive {
+                opacity: 0.4;
+                filter: alpha(opacity=40); /* For IE8 and earlier */
+        }
 	</style>
 </head>
 <body class="wral">
