@@ -18,6 +18,83 @@
 		<div class="container">
 			<div class="1-default">
 				<h2 style="margin-top:20px;">Mapping US states with D3</h2>
+                                <script src="http://d3js.org/d3.v3.min.js"></script>
+                                <script src="http://d3js.org/topojson.v1.min.js"></script>
+                                <div style="clear:both;">
+                                        <select style="margin-top:10px;" id="state_select"> 
+                                                <option value="Alabama">Alabama</option> 
+                                                <option value="Alaska">Alaska</option> 
+                                                <option value="Arizona">Arizona</option> 
+                                                <option value="Arkansas">Arkansas</option> 
+                                                <option value="California">California</option> 
+                                                <option value="Colorado">Colorado</option> 
+                                                <option value="Connecticut">Connecticut</option> 
+                                                <option value="Delaware">Delaware</option>
+                                                <option value="Florida">Florida</option> 
+                                                <option value="Georgia">Georgia</option> 
+                                                <option value="Hawaii">Hawaii</option> 
+                                                <option value="Idaho">Idaho</option> 
+                                                <option value="Illinois">Illinois</option> 
+                                                <option value="Indiana">Indiana</option> 
+                                                <option value="Iowa">Iowa</option> 
+                                                <option value="Kansas">Kansas</option> 
+                                                <option value="Kentucky">Kentucky</option> 
+                                                <option value="Louisiana">Louisiana</option> 
+                                                <option value="Maine">Maine</option> 
+                                                <option value="Maryland">Maryland</option> 
+                                                <option value="Massachusetts">Massachusetts</option> 
+                                                <option value="Michigan">Michigan</option> 
+                                                <option value="Minnesota">Minnesota</option> 
+                                                <option value="Mississippi">Mississippi</option> 
+                                                <option value="Missouri">Missouri</option> 
+                                                <option value="Montana">Montana</option> 
+                                                <option value="Nebraska">Nebraska</option> 
+                                                <option value="Nevada">Nevada</option> 
+                                                <option value="New Hampshire">New Hampshire</option> 
+                                                <option value="New Jersey">New Jersey</option> 
+                                                <option value="New Mexico">New Mexico</option> 
+                                                <option value="New York">New York</option> 
+                                                <option value="North Carolina" selected="selected">North Carolina</option> 
+                                                <option value="North Dakota">North Dakota</option>
+                                                <option value="Ohio">Ohio</option>  
+                                                <option value="Oklahoma">Oklahoma</option> 
+                                                <option value="Oregon">Oregon</option> 
+                                                <option value="Pennsylvania">Pennsylvania</option> 
+                                                <option value="Rhode Island">Rhode Island</option> 
+                                                <option value="South Carolina">South Carolina</option> 
+                                                <option value="South Dakota">South Dakota</option> 
+                                                <option value="Tennessee">Tennessee</option> 
+                                                <option value="Texas">Texas</option> 
+                                                <option value="Utah">Utah</option> 
+                                                <option value="Vermont">Vermont</option> 
+                                                <option value="Virginia">Virginia</option> 
+                                                <option value="Washington">Washington</option> 
+                                                <option value="West Virginia">West Virginia</option> 
+                                                <option value="Wisconsin">Wisconsin</option> 
+                                                <option value="Wyoming">Wyoming</option>
+                                        </select>
+
+                                        <!-- MAP HERE -->
+                                        <div id="map" style="margin-bottom:0px;">
+                                        </div>
+                                        <!-- END MAP -->
+                                        <div style="margin:0;">
+                                                <div style="margin:0;padding-top:0px;display:block;">
+                                                        <div style="float:right;padding-bottom:30px;">
+                                                                <div style="text-align:center;text-transform:uppercase;font-size:12px;padding:0;">% vulnerable</div>
+                                                                <div>
+                                                                        <div class="maplegend" style="background-color:#3182bd;"><br />18+</div>
+                                                                        <div class="maplegend" style="background-color:#9ecae1;"><br />7-18</div>
+                                                                        <div class="maplegend" style="background-color:#deebf7;"><br />3-7</div>
+                                                                        <div class="maplegend-a" style="background-color:#eff3ff;"><br />0-3</div>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <div>
+                                                        <h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Vulnerable: <span style="color:#333;"><span id="vulnerable">6.45</span>%</span></h4>
+                                                </div>
+                                        </div>
+                                </div>
 
 				<p>A basic, clean D3 map for applications and illustrations about the U.S. using state shapefiles.</p>
 
@@ -153,17 +230,8 @@ img#icon_inactive {
                         &lt;/div>
                 &lt;/div>
                 &lt;div>
-                        &lt;h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Vulnerable: &lt;span style="color:#333;">&lt;span id="vulnerable">6.45&lt;/span>%&lt;/span>&lt;br />
-                                Medicaid expansion: &lt;span style="color:#333;" id="med_expansion">No&lt;/span>&lt;/h4>
-                &lt;/div>
-                &lt;div style="width:300px;display:inline;float:left;font-size:18px; font-family:'Droid Sans',Helvetica,sans-serif;clear:both; color:#b7b7b7">
-                        Vulnerable hospitals: &lt;span id="vulnerable_hospitals" style="color:#333;">4&lt;/span>
-                &lt;/div>
-                &lt;div style="width:300px;display:inline;float:left;font-size:18px; font-family:'Droid Sans',Helvetica,sans-serif; color:#b7b7b7">
-                        Hospitals studied: &lt;span id="total_hospitals" style="color:#333;">62&lt;/span>
-                &lt;/div>
-                &lt;div style="clear:both;display:block;text-align: right; font-style: italic; font-size: 11px; color: rgb(171, 171, 171); font-family:'Droid Sans',Helvetica,sans-serif; padding:10px 0; position:relative;">&lt;a href="http://data.ap.org/projects/2015/rural-hospitals/">Source: Associated Press&lt;/a>&lt;/div>
-                &lt;/div>
+                        &lt;h4 style="font-weight:300; margin-top:10px;line-height: 120%; color:#b7b7b7;">Vulnerable: &lt;span style="color:#333;">&lt;span id="vulnerable">6.45&lt;/span>%&lt;/span>&lt;/h4>
+
 &lt;/div>
                                 </pre>
 				<br />
@@ -295,9 +363,6 @@ require(
           i++;
         }
         document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
-        document.getElementById("vulnerable_hospitals").innerHTML = stats[i]['Vulnerable Rural Hospitals'];
-        document.getElementById("med_expansion").innerHTML = stats[i]['Medicaid Expansion'];
-        document.getElementById("total_hospitals").innerHTML = stats[i]['Total Rural Hospitals Studied'];
       });
     }
 
@@ -312,9 +377,6 @@ require(
       $('path').attr('class','us_state');
       $('#'+ state).attr('class','us_state selected');
       document.getElementById("vulnerable").innerHTML = stats[i]['Percent Vulnerable'];
-      document.getElementById("vulnerable_hospitals").innerHTML = stats[i]['Vulnerable Rural Hospitals'];
-      document.getElementById("med_expansion").innerHTML = stats[i]['Medicaid Expansion'];
-      document.getElementById("total_hospitals").innerHTML = stats[i]['Total Rural Hospitals Studied'];
       //Invoke d3 command for making sure path is properly shaded
       $('#'+state).d3Click();
     });
