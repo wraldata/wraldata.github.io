@@ -488,7 +488,7 @@ require(
                         d3.select(this).classed("selected", true);
                         svg.selectAll("path").sort(function (a, b) { // select the parent and sort the paths
                                 console.log("a:" + a + " d:" + d);
-                                if (a.id != d.id) {return -1;}              // a is not the clicked element, send "a" to the back
+                                if (a != d) {return -1;}              // a is not the clicked element, send "a" to the back
                                 else {return 1;}                             // a is the clicked element, bring "a" to the front
                         });
                 });
