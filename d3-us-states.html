@@ -490,12 +490,6 @@ require(
                                 if (a != d) {return -1;}              // a is not the clicked element, send "a" to the back
                                 else {return 1;}                             // a is the clicked element, bring "a" to the front
                         });
-                })
-                .on("hover", function(d) {
-                        svg.selectAll("path").sort(function (a, b) { // select the parent and sort the paths
-                                if (a != d) {return -1;}              // a is not the hovered element, send "a" to the back
-                                else {return 1;}                             // a is the hovered element, bring "a" to the front
-                        });
                 });
                 run_rural();
                 bindClicks();
