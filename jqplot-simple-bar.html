@@ -1,0 +1,209 @@
+<head>
+	<title>Simple bar chart with jqPlot</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CDroid+Sans:400,700%7CArvo:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="./main.min.css">
+	<link rel="Shortcut Icon" href="http://wwwcache.wral.com/favicon.ico" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="./libraries/jqplot/jquery.jqplot.css" />
+    <script language="javascript" type="text/javascript" src="./libraries/jqplot/jquery.jqplot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.barRenderer.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.pointLabels.js"></script>
+	<style>
+		pre, code {
+            padding: 5px;
+            background-color: #e9e9e9;
+        }
+        .jqplot-target {
+			font: 400 14px "Droid Sans",Helvetica,sans-serif;
+			color: #000000;
+		}
+		.attr{
+			text-align: right;
+			font-style: italic;
+			font-size: 11px;
+			color: rgb(171, 171, 171);
+			margin:0;
+			padding:0px;
+			clear:both;
+		}
+		hr {
+			margin-bottom:6px;
+		}
+		.jqplot-large{
+			margin-bottom:10px;
+		}
+	</style>
+</head>
+<body class="wral">
+	<div class="g-wrap">
+		<div class="container">
+			<div class="1-default">
+				<h2 style="margin-top:20px;">Simple bar chart with jqPlot</h2>
+				<hr>
+				<!-- GRAPHIC HERE -->
+				<div style="clear:both;">
+					<h4>Chart title</h4>
+					<div id="bar-chart1" class="jqplot-large"></div>
+					<p >Here, we will explain what's happening.</p>
+				</div>
+				<div class="attr">
+					Source: Source here
+				</div>
+				<hr />
+				<!-- END GRAPHIC -->
+
+				<p>A basic, responsive bar chart using the jqPlot library, with hardcoded data values in four categories.</p>
+
+				<!-- EMBED TAG HERE -->
+				<h4 style="margin-top:20px;" id="etag-top">Embed tag <button class="btn" data-clipboard-target="#etag">Copy this</button></h4>
+				<p>Jump to <a href="#rjs-top">RequireJS module</a> // <a href="#css-top">CSS requirements</a></p>
+                <pre lang="html" id="etag">
+&lt;style type="text/css">
+	.jqplot-target {
+		font: 400 14px "Droid Sans",Helvetica,sans-serif;
+		color: #000000;
+	}
+	.attr{
+		text-align: right;
+		font-style: italic;
+		font-size: 11px;
+		color: rgb(171, 171, 171);
+		margin:0;
+		padding:0px;
+		clear:both;
+	}
+	hr {
+		margin-bottom:6px;
+	}
+	.jqplot-large{
+			margin-bottom:10px;
+	}
+&lt;/style>
+&lt;hr />
+&lt;div style="clear:both;">
+	&lt;h4>Chart title&lt;/h4>
+	&lt;div id="bar-chart1" class="jqplot-large">&lt;/div>
+	&lt;p >Here, we will explain what's happening.&lt;/p>
+&lt;/div>
+&lt;div class="attr">
+	Source: Source here
+&lt;/div>
+&lt;hr /></pre>
+                <!-- END EMBED TAG -->
+
+                <!-- CSS REQUIREMENTS HERE -->
+                <h4 style="margin-top:20px;" id="css-top">CSS requirements <button class="btn" data-clipboard-target="#css-req">Copy this</button></h4>
+				<p>Jump to <a href="#rjs-top">RequireJS module</a> // <a href="#etag-top">embed tag</a></p>
+                <pre id="css-req">
+vendor/plugins/jquery.jqplot</pre>
+                <!-- END CSS REQUIREMENTS -->
+
+                <!-- REQUIREJS MODULE HERE -->
+                <h4 style="margin-top:20px;" id="rjs-top">RequireJS module <button class="btn" data-clipboard-target="#rjs">Copy this</button></h4>
+				<p>Jump to <a href="#etag-top">embed tag</a> // <a href="#css-top">CSS requirements</a></p>
+                <pre id="rjs">
+require(
+	['jquery','lodash','vendor/plugins/jqplot'],
+
+	function($, _) {
+
+		var data = [24967702.07,13308801.05,269261.31,45429.29];
+		var ticks = ['Thing 1','Thing 2','Thing 3','Thing 4'];
+
+		var options = { 
+			seriesColors: ['#a6cee3', '#b2df8a','#33a02c','#1f78b4'],
+			grid: {
+				drawBorder: false, 
+				drawGridlines: false,
+				background: '#ffffff',
+				shadow:false
+			},
+			seriesDefaults: {
+				renderer: $.jqplot.BarRenderer,
+				rendererOptions:{
+					varyBarColor: true,
+				},
+				shadow:false,
+				pointLabels: {
+					show: true,
+					formatString: "$%'i"
+				}
+			},
+			axes: {
+				xaxis: {
+					renderer: $.jqplot.CategoryAxisRenderer,
+					ticks: ticks
+				},
+				yaxis: {
+					tickOptions: {
+						formatString: "$%'i"
+					},
+					pad: 1.2,
+					min: 0
+				}
+			},
+			highlighter: {
+				show: false
+			}
+		};
+		var plot1 = $.jqplot ('bar-chart1', [data], options);
+		$(window).resize('resize',function() {
+    		plot1.replot({resetAxes:['xaxis']});
+		});
+	}
+);</pre>
+                <!-- END REQUIREJS MODULE -->
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
+	<script>
+		new Clipboard('.btn');
+
+		var data = [24967702.07,13308801.05,269261.31,45429.29];
+		var ticks = ['Thing 1','Thing 2','Thing 3','Thing 4'];
+
+		var options = { 
+			seriesColors: ['#a6cee3', '#b2df8a','#33a02c','#1f78b4'],
+			grid: {
+				drawBorder: false, 
+				drawGridlines: false,
+				background: '#ffffff',
+				shadow:false
+			},
+			seriesDefaults: {
+				renderer: $.jqplot.BarRenderer,
+				rendererOptions:{
+					varyBarColor: true,
+				},
+				shadow:false,
+				pointLabels: {
+					show: true,
+					formatString: "$%'i"
+				}
+			},
+			axes: {
+				xaxis: {
+					renderer: $.jqplot.CategoryAxisRenderer,
+					ticks: ticks
+				},
+				yaxis: {
+					tickOptions: {
+						formatString: "$%'i"
+					},
+					pad: 1.2,
+					min: 0
+				}
+			},
+			highlighter: {
+				show: false
+			}
+		};
+		var plot1 = $.jqplot ('bar-chart1', [data], options);
+		$(window).resize('resize',function() {
+    		plot1.replot({resetAxes:['xaxis']});
+		});
+
+	</script>
+</body>
