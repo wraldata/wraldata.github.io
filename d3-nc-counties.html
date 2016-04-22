@@ -3,7 +3,7 @@
 	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CDroid+Sans:400,700%7CArvo:400,700" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="./main.min.css">
 	<link rel="Shortcut Icon" href="http://wwwcache.wral.com/favicon.ico" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<style>
 	   pre, code {
             padding: 5px;
@@ -76,7 +76,6 @@
             line-height: 120%;
             color:#b7b7b7;
         }
-
 	</style>
 </head>
 <body class="wral">
@@ -192,7 +191,11 @@
                         </select>
 
                         <!-- MAP HERE -->
-                        <div id="map" style="margin-bottom:0px;">
+                        <div class="map-loading" style="height:225px;">
+                            <h3 style="text-align:center;margin-top:40px;margin-bottom:10px;text-transform:uppercase;">Loading map</h3>
+                            <img src="http://wwwcache.wral.com/presentation/v3/images/widgets/wait_popup/spinner.gif" style="width:31px;margin:auto;display:block;" />
+                        </div>
+                        <div id="map" style="margin-bottom:0px; display:none;">
                         </div>
                         <!-- END MAP -->
 
@@ -221,12 +224,13 @@
 				<p style="clear:both;">A basic, clean, responsive D3 map for applications and illustrations about the NC using county shapefiles.</p>
                 <p>Click a state and pull data from a related JSON file. This choropeth version colors counties according to predefined categories.</p>
 
-				<h4 style="margin-top:20px;">Embed tag <button class="btn" id="etag-copy" data-clipboard-target="#etag">Copy this</button></h4>
-				<pre lang="html" id="etag">
+				<h4 style="margin-top:20px;" id="etag-top">Embed tag <button class="btn" id="etag-copy" data-clipboard-target="#etag">Copy this</button></h4>
+				<p><a href="#rjs-top">Jump to the RequireJS module</a></p>
+                <pre lang="html" id="etag">
 &lt;style type="text/css">
 .nc_county {
     stroke: #fff;
-    stroke-width:0.7;
+    stroke-width:1;
 }
 .nc_county:hover {
     stroke:#a6a8ab;
@@ -427,8 +431,9 @@ hr {
     &lt;hr />
 &lt;/div></pre>
 				<br />
-				<h4 style="margin-top:20px;">RequireJS Module <button class="btn" id="rjs-copy" data-clipboard-target="#rjs">Copy this </button></h4>
-				<pre id="rjs">
+				<h4 style="margin-top:20px;" id="rjs-top">RequireJS Module <button class="btn" id="rjs-copy" data-clipboard-target="#rjs">Copy this </button></h4>
+				<p><a href="#etag-top">Jump to the Embed tag</a></p>
+                <pre id="rjs">
 require(
   ['jquery','lodash', 'http://d3js.org/d3.v3.min.js','http://d3js.org/topojson.v1.min.js'],
 
