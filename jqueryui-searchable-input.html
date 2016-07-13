@@ -1,0 +1,319 @@
+<head>
+	<title>Searchable input with jQueryUI</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CDroid+Sans:400,700%7CArvo:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="./main.min.css">
+	<link rel="Shortcut Icon" href="http://wwwcache.wral.com/favicon.ico" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<link rel="stylesheet" href="./libraries/jquery-ui/jquery-ui.css">
+	<script src="./libraries/jquery-ui/jquery-ui.js"></script>
+	<style>
+		pre, code {
+			padding: 5px;
+			background-color: #e9e9e9;
+		}
+	</style>
+</head>
+<body class="wral">
+	<div class="g-wrap">
+		<div class="container">
+			<div class="1-default">
+				<h2 style="margin-top:20px;">Searchable input with jQueryUI</h2>
+				<hr>
+				<!-- GRAPHIC HERE -->
+				<div style="clear:both;">
+					<input id="search-box" type="text" placeholder="Search for an NC county..."/>
+					<div id="no-results" style="display:none;"></div>
+					<div id="search-results" style="display:none;">
+						<p>You selected <span id="selection"></span>!</p>
+					</div>
+				</div>
+				<!-- END GRAPHIC -->
+				<hr />
+				<p>User input to allow search and select of set, hardcoded values. In this case, it's states. Code forces selection from list only. Input not found will return "No results."</p>
+
+				<!-- EMBED TAG HERE -->
+				<h4 style="margin-top:20px;" id="etag-top">Embed tag <button class="btn" data-clipboard-target="#etag">Copy this</button></h4>
+				<p>Jump to <a href="#rjs-top">RequireJS module</a></p>
+				<pre lang="html" id="etag">
+&lt;div style="clear:both;">
+	&lt;input id="search-box" type="text" placeholder="Search for a county..."/>
+	&lt;div id="no-results" style="display:none;">&lt;/div>
+	&lt;div id="search-results" style="display:none;">
+		&lt;p>You selected &lt;span id="selection">&lt;/span>!&lt;/p>
+	&lt;/div>
+&lt;/div></pre>
+				<!-- END EMBED TAG -->
+
+				<!-- REQUIREJS MODULE HERE -->
+				<h4 style="margin-top:20px;" id="rjs-top">RequireJS module <button class="btn" data-clipboard-target="#rjs">Copy this</button></h4>
+				<p>Jump to <a href="#etag-top">embed tag</a></p>
+				<pre id="rjs">
+require(
+	['jquery','jquery-ui','lodash','vendor/plugins/jqplot'],
+
+	function($, _) {
+		//create a list of all your search options
+		var searchOptions = [
+			'Alamance',
+			'Alexander',
+			'Alleghany',
+			'Anson',
+			'Ashe',
+			'Avery',
+			'Beaufort',
+			'Bertie',
+			'Bladen',
+			'Brunswick',
+			'Buncombe',
+			'Burke',
+			'Cabarrus',
+			'Caldwell',
+			'Camden',
+			'Carteret',
+			'Caswell',
+			'Catawba',
+			'Chatham',
+			'Cherokee',
+			'Chowan',
+			'Clay',
+			'Cleveland',
+			'Columbus',
+			'Craven',
+			'Cumberland',
+			'Currituck',
+			'Dare',
+			'Davidson',
+			'Davie',
+			'Duplin',
+			'Durham',
+			'Edgecombe',
+			'Forsyth',
+			'Franklin',
+			'Gaston',
+			'Gates',
+			'Graham',
+			'Granville',
+			'Greene',
+			'Guilford',
+			'Halifax',
+			'Harnett',
+			'Haywood',
+			'Henderson',
+			'Hertford',
+			'Hoke',
+			'Hyde',
+			'Iredell',
+			'Jackson',
+			'Johnston',
+			'Jones',
+			'Lee',
+			'Lenoir',
+			'Lincoln',
+			'Macon',
+			'Madison',
+			'Martin',
+			'McDowell',
+			'Mecklenburg',
+			'Mitchell',
+			'Montgomery',
+			'Moore',
+			'Nash',
+			'New Hanover',
+			'Northampton',
+			'Onslow',
+			'Orange',
+			'Pamlico',
+			'Pasquotank',
+			'Pender',
+			'Perquimans',
+			'Person',
+			'Pitt',
+			'Polk',
+			'Randolph',
+			'Richmond',
+			'Robeson',
+			'Rockingham',
+			'Rowan',
+			'Rutherford',
+			'Sampson',
+			'Scotland',
+			'Stanly',
+			'Stokes',
+			'Surry',
+			'Swain',
+			'Transylvania',
+			'Tyrrell',
+			'Union',
+			'Vance',
+			'Wake',
+			'Warren',
+			'Washington',
+			'Watauga',
+			'Wayne',
+			'Wilkes',
+			'Wilson',
+			'Yadkin',
+			'Yancey'
+		];
+		$("#search-box").autocomplete({
+			//tell the search box which options you want
+			source: searchOptions,
+			//force the selection of dropdown list
+			//return "No results found" if invalid
+			response: function(event, ui){
+				if (ui.content.length === 0) {
+					$("#search-results").css("display","none");
+					$("#no-results").css("display","block");
+					$("#no-results").text("No results found");
+				}
+				else {
+					$("#no-results").empty();
+				}
+			},
+			//On selection, display the value the user selected.
+			select: function(event, ui){
+				if(!ui.item){
+					$('#search-lea').val('');
+				}
+				$("#search-results").css("display","block");
+				$('#selection').text(ui.item.value);
+			}
+		});
+
+	}//end main function
+);//end require
+				</pre>
+				<!-- END REQUIREJS MODULE -->
+
+			</div><!--end content div-->
+		</div>
+	</div>
+	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
+	<script>
+	//initialize clipboard button object
+	new Clipboard('.btn');
+
+	var searchOptions = [
+		'Alamance',
+		'Alexander',
+		'Alleghany',
+		'Anson',
+		'Ashe',
+		'Avery',
+		'Beaufort',
+		'Bertie',
+		'Bladen',
+		'Brunswick',
+		'Buncombe',
+		'Burke',
+		'Cabarrus',
+		'Caldwell',
+		'Camden',
+		'Carteret',
+		'Caswell',
+		'Catawba',
+		'Chatham',
+		'Cherokee',
+		'Chowan',
+		'Clay',
+		'Cleveland',
+		'Columbus',
+		'Craven',
+		'Cumberland',
+		'Currituck',
+		'Dare',
+		'Davidson',
+		'Davie',
+		'Duplin',
+		'Durham',
+		'Edgecombe',
+		'Forsyth',
+		'Franklin',
+		'Gaston',
+		'Gates',
+		'Graham',
+		'Granville',
+		'Greene',
+		'Guilford',
+		'Halifax',
+		'Harnett',
+		'Haywood',
+		'Henderson',
+		'Hertford',
+		'Hoke',
+		'Hyde',
+		'Iredell',
+		'Jackson',
+		'Johnston',
+		'Jones',
+		'Lee',
+		'Lenoir',
+		'Lincoln',
+		'Macon',
+		'Madison',
+		'Martin',
+		'McDowell',
+		'Mecklenburg',
+		'Mitchell',
+		'Montgomery',
+		'Moore',
+		'Nash',
+		'New Hanover',
+		'Northampton',
+		'Onslow',
+		'Orange',
+		'Pamlico',
+		'Pasquotank',
+		'Pender',
+		'Perquimans',
+		'Person',
+		'Pitt',
+		'Polk',
+		'Randolph',
+		'Richmond',
+		'Robeson',
+		'Rockingham',
+		'Rowan',
+		'Rutherford',
+		'Sampson',
+		'Scotland',
+		'Stanly',
+		'Stokes',
+		'Surry',
+		'Swain',
+		'Transylvania',
+		'Tyrrell',
+		'Union',
+		'Vance',
+		'Wake',
+		'Warren',
+		'Washington',
+		'Watauga',
+		'Wayne',
+		'Wilkes',
+		'Wilson',
+		'Yadkin',
+		'Yancey'
+	];
+	$("#search-box").autocomplete({
+		source: searchOptions,
+		response: function(event, ui){
+			if (ui.content.length === 0) {
+				$("#search-results").css("display","none");
+				$("#no-results").css("display","block");
+				$("#no-results").text("No results found");
+			}
+			else {
+				$("#no-results").empty();
+			}
+		},
+		select: function(event, ui){
+			if(!ui.item){
+				$('#search-lea').val('');
+			}
+			$("#search-results").css("display","block");
+			$('#selection').text(ui.item.value);
+		}
+	});
+	</script>
+</body>
