@@ -1,0 +1,320 @@
+<head>
+	<title>Line chart with button options</title>
+	<link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700%7CDroid+Sans:400,700%7CArvo:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="./main.min.css">
+	<link rel="Shortcut Icon" href="http://wwwcache.wral.com/favicon.ico" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./libraries/jqplot/jquery.jqplot.css" />
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/jquery.jqplot.min.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+	<script language="javascript" type="text/javascript" src="./libraries/jqplot/plugins/jqplot.pointLabels.js"></script>
+	<style>
+		pre, code {
+			padding: 5px;
+			background-color: #e9e9e9;
+		}
+		.jqplot-target {
+			font: 400 14px "Droid Sans",Helvetica,sans-serif;
+			color: #000000;
+		}
+		.attr{
+			text-align: right;
+			font-style: italic;
+			font-size: 11px;
+			color: rgb(171, 171, 171);
+			margin:0;
+			padding:0px;
+			clear:both;
+		}
+		.jqplot-large{
+			margin-bottom:10px;
+		}
+		.jqplot-yaxis-label {
+			padding-left:15px;
+		}
+	</style>
+</head>
+<body class="wral">
+	<div class="g-wrap">
+		<div class="container">
+			<div class="1-default">
+				<h2 style="margin-top:20px;">Line chart with buttons and external data</h2>
+				<hr>
+				<!-- GRAPHIC HERE -->
+				<div style="clear:both;">
+					<h4>Chart title</h4>
+					<b>Select option: </b>
+					<button class="btn btn-options" disabled id="data1">Option 1</button>
+					<button class="btn btn-options" id="data2">Option 2</button>
+					<div id="line-chart1" class="jqplot-large"></div>
+					<p >Here, we will explain what's happening.</p>
+				</div>
+				<div class="attr">
+					Source: Source here
+				</div>
+				<hr />
+				<!-- END GRAPHIC -->
+
+				<p>A responsive line chart using the jqPlot library, with data loaded from an external resource (like a dataset). Includes buttons to change data source.</p>
+				<p>In this example, we pass in different options for the axis label and decimal format.</p>
+
+				<!-- EMBED TAG HERE -->
+				<h4 style="margin-top:20px;" id="etag-top">Embed tag <button class="btn" data-clipboard-target="#etag">Copy this</button></h4>
+				<p>Jump to <a href="#rjs-top">RequireJS module</a> // <a href="#css-top">CSS requirements</a></p>
+				<pre lang="html" id="etag">
+&lt;style type="text/css">
+	.jqplot-target {
+		font: 400 14px "Droid Sans",Helvetica,sans-serif;
+		color: #000000;
+	}
+	.attr{
+		text-align: right;
+		font-style: italic;
+		font-size: 11px;
+		color: rgb(171, 171, 171);
+		margin:0;
+		padding:0px;
+		clear:both;
+	}
+	.jqplot-large{
+			margin-bottom:10px;
+	}
+&lt;/style>
+&lt;hr />
+&lt;div style="clear:both;">
+	&lt;h4>Chart title&lt;/h4>
+	&lt;b>Select option: &lt;/b>
+	&lt;button class="btn btn-options" disabled id="data1">Option 1&lt;/button>
+	&lt;button class="btn btn-options" id="data2">Option 2&lt;/button>
+	&lt;div id="line-chart1" class="jqplot-large">&lt;/div>
+	&lt;p >Here, we will explain what's happening.&lt;/p>
+&lt;/div>
+&lt;div class="attr">
+	Source: Source here
+&lt;/div>
+&lt;hr /></pre>
+				<!-- END EMBED TAG -->
+
+				<!-- CSS REQUIREMENTS HERE -->
+				<h4 style="margin-top:20px;" id="css-top">CSS requirements <button class="btn" data-clipboard-target="#css-req">Copy this</button></h4>
+				<p>Jump to <a href="#rjs-top">RequireJS module</a> // <a href="#etag-top">embed tag</a></p>
+				<pre id="css-req">
+vendor/plugins/jquery.jqplot</pre>
+				<!-- END CSS REQUIREMENTS -->
+
+				<!-- REQUIREJS MODULE HERE -->
+				<h4 style="margin-top:20px;" id="rjs-top">RequireJS module <button class="btn" data-clipboard-target="#rjs">Copy this</button></h4>
+				<p>Jump to <a href="#etag-top">embed tag</a> // <a href="#css-top">CSS requirements</a></p>
+				<pre id="rjs">
+require(
+	['jquery','lodash','vendor/plugins/jqplot'],
+
+	function($, _) {
+	//implement event listener for buttons
+	$('.btn-options').click(function(event){
+		event.preventDefault();
+		//disabled whichever button isn't clicked
+		$('.btn-options').prop('disabled', false);
+		$('.btn-options#'+event.target.id).prop('disabled', true);
+		//if it's choice No. 1, select data1 and change the options
+		if (event.target.id == 'data1'){
+			//this changes the formatting to thousand separators and no decimals
+			plot1.options.seriesDefaults.pointLabels.formatString = "%'.0f";
+			plot1.options.axes.yaxis.label = "Data option 1";
+		}
+		//if it's choice No. 2, select data1 and change the options
+		else {
+			//this changes the formatting to thousand separators and 2 decimals
+			plot1.options.seriesDefaults.pointLabels.formatString = "%'.2f";
+			plot1.options.axes.yaxis.label = "Data option 2";
+		}
+		//run our plot loader function, passing in the id of the button clicked
+		loadPlotData(event.target.id);
+	});
+	//declare the options for the graph
+	var options = {
+			grid: {
+				drawBorder: false, 
+				drawGridlines: false,
+				background: '#ffffff',
+				shadow:false
+			},
+			axesDefaults: {
+				labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+			},
+			seriesDefaults: {
+				color: '#2594E3',
+				shadow:false,
+				pointLabels: {
+					show: true,
+					formatString: "%'.0f",
+					ypadding: 10
+				},
+				markerOptions: {
+					shadow:false
+				},
+				breakOnNull: true
+			},
+			axes: {
+				xaxis: {
+					renderer: $.jqplot.CategoryAxisRenderer,
+					//create an option for ticks, which we'll declare later
+					ticks: '',
+					label: "Year",
+					drawBaseline:true,
+				},
+				yaxis: {
+					label: "Some quantity of stuff",
+					pad:1.2,
+					min:0,
+					tickOptions:{
+						formatString: "%'.0f"
+					}
+				}
+			}
+		};
+		//set a flag to tell if the chart's been plotted, set to 0
+		plotted = 0;
+		//run the plot loader function for the first time
+		loadPlotData('data1');
+		//main plot loader function, which accepts our data selection
+		function loadPlotData(selection) {
+			//this will be the y variables
+			plotData = [];
+			//this will be the x variables
+			ticks = [];
+			//load our external data
+			$.ajax({
+				'async': true,
+				'global': false,
+				//define the source of our data, adding in the selector
+				'url': 'https://raw.githubusercontent.com/wraldata/wraldata.github.io/master/data/plot-'+selection+'.json',
+				'dataType': "json",
+				'success': function (data) {
+					//go through all the data items
+					$.each(data, function(index, item){
+						//add the "value" to the y variables
+						plotData.push(item.value);
+						//add the "year" to the x variables
+						ticks.push(item.year);
+					});
+					//define our x variables
+					options.axes.xaxis.ticks = ticks;
+					//if the plot doesn't exist yet, draw it
+					if (plotted == 0){
+						plot1 = $.jqplot('line-chart1',[plotData],options);
+						//the plot's been drawn, so change our flag
+						plotted = 1;
+					}
+					//if the plot exists, replot with new data
+					else{
+						plot1.replot({data:[plotData]});
+					}
+					//make sure it's responsive
+					$(window).resize('resize',function() {
+						plot1.replot({resetAxes:['xaxis']});
+					});
+				}
+			});
+		}
+	}//end main function
+);//end require
+				</pre>
+				<!-- END REQUIREJS MODULE -->
+
+			</div><!--end content div-->
+		</div>
+	</div>
+	<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.10/dist/clipboard.min.js"></script>
+	<script>
+	//initialize clipboard button object
+	new Clipboard('.btn');
+
+	$('.btn-options').click(function(event){
+		event.preventDefault();
+		$('.btn-options').prop('disabled', false);
+		$('.btn-options#'+event.target.id).prop('disabled', true);
+		if (event.target.id == 'data1'){
+			plot1.options.seriesDefaults.pointLabels.formatString = "%'.0f";
+			plot1.options.axes.yaxis.label = "Data option 1";
+		}
+		else {
+			plot1.options.seriesDefaults.pointLabels.formatString = "%'.2f";
+			plot1.options.axes.yaxis.label = "Data option 2";
+		}
+		loadPlotData(event.target.id);
+	});
+	var options = {
+			grid: {
+				drawBorder: false, 
+				drawGridlines: false,
+				background: '#ffffff',
+				shadow:false
+			},
+			axesDefaults: {
+				labelRenderer: $.jqplot.CanvasAxisLabelRenderer
+			},
+			seriesDefaults: {
+				color: '#2594E3',
+				shadow:false,
+				pointLabels: {
+					show: true,
+					formatString: "%'.0f",
+					ypadding: 10
+				},
+				markerOptions: {
+					shadow:false
+				},
+				breakOnNull: true
+			},
+			axes: {
+				xaxis: {
+					renderer: $.jqplot.CategoryAxisRenderer,
+					ticks: '',
+					label: "Year",
+					drawBaseline:true,
+				},
+				yaxis: {
+					label: "Some quantity of stuff",
+					pad:1.2,
+					min:0,
+					tickOptions:{
+						formatString: "%'.0f"
+					}
+				}
+			}
+		};
+		plotted = 0;
+		loadPlotData('data1');
+		function loadPlotData(selection) {
+			plotData = [];
+			ticks = [];
+			$.ajax({
+				'async': true,
+				'global': false,
+				'url': 'https://raw.githubusercontent.com/wraldata/wraldata.github.io/master/data/plot-'+selection+'.json',
+				'dataType': "json",
+				'success': function (data) {
+					$.each(data, function(index, item){
+						plotData.push(item.value);
+						ticks.push(item.year);
+					});
+					options.axes.xaxis.ticks = ticks;
+					if (plotted == 0){
+						plot1 = $.jqplot('line-chart1',[plotData],options);
+						plotted = 1;
+					}
+					else{
+						plot1.replot({data:[plotData]});
+					}
+					$(window).resize('resize',function() {
+						plot1.replot({resetAxes:['xaxis']});
+					});
+				}
+			});
+		}
+
+	</script>
+</body>
