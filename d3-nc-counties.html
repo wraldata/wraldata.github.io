@@ -86,143 +86,148 @@
         }
         </style>
         <script src="https://d3js.org/topojson.v1.min.js"></script>
-        <div style="clear:both;">
-            <hr />
-            <h4>Data by county</h4>
-            <p>Select a county below to find out some data, adjusted for each county's labor force/population etc, as of some date.</p>
-                <select style="margin-top:10px;" id="county_select">
-                        <option value="ALAMANCE">ALAMANCE</option>
-                        <option value="ALEXANDER">ALEXANDER</option>
-                        <option value="ALLEGHANY">ALLEGHANY</option>
-                        <option value="ANSON">ANSON</option>
-                        <option value="ASHE">ASHE</option>
-                        <option value="AVERY">AVERY</option>
-                        <option value="BEAUFORT">BEAUFORT</option>
-                        <option value="BERTIE">BERTIE</option>
-                        <option value="BLADEN">BLADEN</option>
-                        <option value="BRUNSWICK">BRUNSWICK</option>
-                        <option value="BUNCOMBE">BUNCOMBE</option>
-                        <option value="BURKE">BURKE</option>
-                        <option value="CABARRUS">CABARRUS</option>
-                        <option value="CALDWELL">CALDWELL</option>
-                        <option value="CAMDEN">CAMDEN</option>
-                        <option value="CARTERET">CARTERET</option>
-                        <option value="CASWELL">CASWELL</option>
-                        <option value="CATAWBA">CATAWBA</option>
-                        <option value="CHATHAM">CHATHAM</option>
-                        <option value="CHEROKEE">CHEROKEE</option>
-                        <option value="CHOWAN">CHOWAN</option>
-                        <option value="CLAY">CLAY</option>
-                        <option value="CLEVELAND">CLEVELAND</option>
-                        <option value="COLUMBUS">COLUMBUS</option>
-                        <option value="CRAVEN">CRAVEN</option>
-                        <option value="CUMBERLAND">CUMBERLAND</option>
-                        <option value="CURRITUCK">CURRITUCK</option>
-                        <option value="DARE">DARE</option>
-                        <option value="DAVIDSON">DAVIDSON</option>
-                        <option value="DAVIE">DAVIE</option>
-                        <option value="DUPLIN">DUPLIN</option>
-                        <option value="DURHAM">DURHAM</option>
-                        <option value="EDGECOMBE">EDGECOMBE</option>
-                        <option value="FORSYTH">FORSYTH</option>
-                        <option value="FRANKLIN">FRANKLIN</option>
-                        <option value="GASTON">GASTON</option>
-                        <option value="GATES">GATES</option>
-                        <option value="GRAHAM">GRAHAM</option>
-                        <option value="GRANVILLE">GRANVILLE</option>
-                        <option value="GREENE">GREENE</option>
-                        <option value="GUILFORD">GUILFORD</option>
-                        <option value="HALIFAX">HALIFAX</option>
-                        <option value="HARNETT">HARNETT</option>
-                        <option value="HAYWOOD">HAYWOOD</option>
-                        <option value="HENDERSON">HENDERSON</option>
-                        <option value="HERTFORD">HERTFORD</option>
-                        <option value="HOKE">HOKE</option>
-                        <option value="HYDE">HYDE</option>
-                        <option value="IREDELL">IREDELL</option>
-                        <option value="JACKSON">JACKSON</option>
-                        <option value="JOHNSTON">JOHNSTON</option>
-                        <option value="JONES">JONES</option>
-                        <option value="LEE">LEE</option>
-                        <option value="LENOIR">LENOIR</option>
-                        <option value="LINCOLN">LINCOLN</option>
-                        <option value="MACON">MACON</option>
-                        <option value="MADISON">MADISON</option>
-                        <option value="MARTIN">MARTIN</option>
-                        <option value="MCDOWELL">MCDOWELL</option>
-                        <option value="MECKLENBURG">MECKLENBURG</option>
-                        <option value="MITCHELL">MITCHELL</option>
-                        <option value="MONTGOMERY">MONTGOMERY</option>
-                        <option value="MOORE">MOORE</option>
-                        <option value="NASH">NASH</option>
-                        <option value="NEW_HANOVER">NEW HANOVER</option>
-                        <option value="NORTHAMPTON">NORTHAMPTON</option>
-                        <option value="ONSLOW">ONSLOW</option>
-                        <option value="ORANGE">ORANGE</option>
-                        <option value="PAMLICO">PAMLICO</option>
-                        <option value="PASQUOTANK">PASQUOTANK</option>
-                        <option value="PENDER">PENDER</option>
-                        <option value="PERQUIMANS">PERQUIMANS</option>
-                        <option value="PERSON">PERSON</option>
-                        <option value="PITT">PITT</option>
-                        <option value="POLK">POLK</option>
-                        <option value="RANDOLPH">RANDOLPH</option>
-                        <option value="RICHMOND">RICHMOND</option>
-                        <option value="ROBESON">ROBESON</option>
-                        <option value="ROCKINGHAM">ROCKINGHAM</option>
-                        <option value="ROWAN">ROWAN</option>
-                        <option value="RUTHERFORD">RUTHERFORD</option>
-                        <option value="SAMPSON">SAMPSON</option>
-                        <option value="SCOTLAND">SCOTLAND</option>
-                        <option value="STANLY">STANLY</option>
-                        <option value="STOKES">STOKES</option>
-                        <option value="SURRY">SURRY</option>
-                        <option value="SWAIN">SWAIN</option>
-                        <option value="TRANSYLVANIA">TRANSYLVANIA</option>
-                        <option value="TYRRELL">TYRRELL</option>
-                        <option value="UNION">UNION</option>
-                        <option value="VANCE">VANCE</option>
-                        <option value="WAKE" selected>WAKE</option>
-                        <option value="WARREN">WARREN</option>
-                        <option value="WASHINGTON">WASHINGTON</option>
-                        <option value="WATAUGA">WATAUGA</option>
-                        <option value="WAYNE">WAYNE</option>
-                        <option value="WILKES">WILKES</option>
-                        <option value="WILSON">WILSON</option>
-                        <option value="YADKIN">YADKIN</option>
-                        <option value="YANCEY">YANCEY</option>
-                </select>
-            <div class="map-loading" style="height:225px;">
-                <h3 style="text-align:center;margin-top:40px;margin-bottom:10px;text-transform:uppercase;">Loading map</h3>
-                <img src="http://wwwcache.wral.com/presentation/v3/images/widgets/wait_popup/spinner.gif" style="width:31px;margin:auto;display:block;" />
-            </div>
-            <div id="map-data" style="display:none;">
-                <div id="map" style="margin-bottom:0px;"></div>
-                <div style="margin:0;">
-                    <div style="margin:0;padding-top:0px;display:block;">
-                        <div style="float:right;padding-bottom:30px;">
-                            <div>
-                                <div class="maplegend" style="background-color:#2171b5;"><br /> <span class="third-quart">XX</span>+</div>
-                                <div class="maplegend" style="background-color:#6baed6;"><br /> to <span class="third-quart">XX</span></div>
-                                <div class="maplegend" style="background-color:#bdd7e7;"><br /> to <span class="second-quart">XX</span></div>
-                                <div class="maplegend-a" style="background-color:#eff3ff;"><br />0-<span class="first-quart">XX</span></div>
+        <body class="wral">
+            <div class="g-wrap">
+                <div class="container">
+                    <div class="1-default">
+                        <h2 style="margin-top:20px;">Mapping NC counties with D3</h2>
+                        <div style="clear:both;">
+                            <hr />
+                            <h4>Data by county</h4>
+                            <p>Select a county below to find out some data, adjusted for each county's labor force/population etc, as of some date.</p>
+                                <select style="margin-top:10px;" id="county_select">
+                                        <option value="ALAMANCE">ALAMANCE</option>
+                                        <option value="ALEXANDER">ALEXANDER</option>
+                                        <option value="ALLEGHANY">ALLEGHANY</option>
+                                        <option value="ANSON">ANSON</option>
+                                        <option value="ASHE">ASHE</option>
+                                        <option value="AVERY">AVERY</option>
+                                        <option value="BEAUFORT">BEAUFORT</option>
+                                        <option value="BERTIE">BERTIE</option>
+                                        <option value="BLADEN">BLADEN</option>
+                                        <option value="BRUNSWICK">BRUNSWICK</option>
+                                        <option value="BUNCOMBE">BUNCOMBE</option>
+                                        <option value="BURKE">BURKE</option>
+                                        <option value="CABARRUS">CABARRUS</option>
+                                        <option value="CALDWELL">CALDWELL</option>
+                                        <option value="CAMDEN">CAMDEN</option>
+                                        <option value="CARTERET">CARTERET</option>
+                                        <option value="CASWELL">CASWELL</option>
+                                        <option value="CATAWBA">CATAWBA</option>
+                                        <option value="CHATHAM">CHATHAM</option>
+                                        <option value="CHEROKEE">CHEROKEE</option>
+                                        <option value="CHOWAN">CHOWAN</option>
+                                        <option value="CLAY">CLAY</option>
+                                        <option value="CLEVELAND">CLEVELAND</option>
+                                        <option value="COLUMBUS">COLUMBUS</option>
+                                        <option value="CRAVEN">CRAVEN</option>
+                                        <option value="CUMBERLAND">CUMBERLAND</option>
+                                        <option value="CURRITUCK">CURRITUCK</option>
+                                        <option value="DARE">DARE</option>
+                                        <option value="DAVIDSON">DAVIDSON</option>
+                                        <option value="DAVIE">DAVIE</option>
+                                        <option value="DUPLIN">DUPLIN</option>
+                                        <option value="DURHAM">DURHAM</option>
+                                        <option value="EDGECOMBE">EDGECOMBE</option>
+                                        <option value="FORSYTH">FORSYTH</option>
+                                        <option value="FRANKLIN">FRANKLIN</option>
+                                        <option value="GASTON">GASTON</option>
+                                        <option value="GATES">GATES</option>
+                                        <option value="GRAHAM">GRAHAM</option>
+                                        <option value="GRANVILLE">GRANVILLE</option>
+                                        <option value="GREENE">GREENE</option>
+                                        <option value="GUILFORD">GUILFORD</option>
+                                        <option value="HALIFAX">HALIFAX</option>
+                                        <option value="HARNETT">HARNETT</option>
+                                        <option value="HAYWOOD">HAYWOOD</option>
+                                        <option value="HENDERSON">HENDERSON</option>
+                                        <option value="HERTFORD">HERTFORD</option>
+                                        <option value="HOKE">HOKE</option>
+                                        <option value="HYDE">HYDE</option>
+                                        <option value="IREDELL">IREDELL</option>
+                                        <option value="JACKSON">JACKSON</option>
+                                        <option value="JOHNSTON">JOHNSTON</option>
+                                        <option value="JONES">JONES</option>
+                                        <option value="LEE">LEE</option>
+                                        <option value="LENOIR">LENOIR</option>
+                                        <option value="LINCOLN">LINCOLN</option>
+                                        <option value="MACON">MACON</option>
+                                        <option value="MADISON">MADISON</option>
+                                        <option value="MARTIN">MARTIN</option>
+                                        <option value="MCDOWELL">MCDOWELL</option>
+                                        <option value="MECKLENBURG">MECKLENBURG</option>
+                                        <option value="MITCHELL">MITCHELL</option>
+                                        <option value="MONTGOMERY">MONTGOMERY</option>
+                                        <option value="MOORE">MOORE</option>
+                                        <option value="NASH">NASH</option>
+                                        <option value="NEW_HANOVER">NEW HANOVER</option>
+                                        <option value="NORTHAMPTON">NORTHAMPTON</option>
+                                        <option value="ONSLOW">ONSLOW</option>
+                                        <option value="ORANGE">ORANGE</option>
+                                        <option value="PAMLICO">PAMLICO</option>
+                                        <option value="PASQUOTANK">PASQUOTANK</option>
+                                        <option value="PENDER">PENDER</option>
+                                        <option value="PERQUIMANS">PERQUIMANS</option>
+                                        <option value="PERSON">PERSON</option>
+                                        <option value="PITT">PITT</option>
+                                        <option value="POLK">POLK</option>
+                                        <option value="RANDOLPH">RANDOLPH</option>
+                                        <option value="RICHMOND">RICHMOND</option>
+                                        <option value="ROBESON">ROBESON</option>
+                                        <option value="ROCKINGHAM">ROCKINGHAM</option>
+                                        <option value="ROWAN">ROWAN</option>
+                                        <option value="RUTHERFORD">RUTHERFORD</option>
+                                        <option value="SAMPSON">SAMPSON</option>
+                                        <option value="SCOTLAND">SCOTLAND</option>
+                                        <option value="STANLY">STANLY</option>
+                                        <option value="STOKES">STOKES</option>
+                                        <option value="SURRY">SURRY</option>
+                                        <option value="SWAIN">SWAIN</option>
+                                        <option value="TRANSYLVANIA">TRANSYLVANIA</option>
+                                        <option value="TYRRELL">TYRRELL</option>
+                                        <option value="UNION">UNION</option>
+                                        <option value="VANCE">VANCE</option>
+                                        <option value="WAKE" selected>WAKE</option>
+                                        <option value="WARREN">WARREN</option>
+                                        <option value="WASHINGTON">WASHINGTON</option>
+                                        <option value="WATAUGA">WATAUGA</option>
+                                        <option value="WAYNE">WAYNE</option>
+                                        <option value="WILKES">WILKES</option>
+                                        <option value="WILSON">WILSON</option>
+                                        <option value="YADKIN">YADKIN</option>
+                                        <option value="YANCEY">YANCEY</option>
+                                </select>
+                            <div class="map-loading" style="height:225px;">
+                                <h3 style="text-align:center;margin-top:40px;margin-bottom:10px;text-transform:uppercase;">Loading map</h3>
+                                <img src="http://wwwcache.wral.com/presentation/v3/images/widgets/wait_popup/spinner.gif" style="width:31px;margin:auto;display:block;" />
                             </div>
+                            <div id="map-data" style="display:none;">
+                                <div id="map" style="margin-bottom:0px;"></div>
+                                <div style="margin:0;">
+                                    <div style="margin:0;padding-top:0px;display:block;">
+                                        <div style="float:right;padding-bottom:30px;">
+                                            <div>
+                                                <div class="maplegend" style="background-color:#2171b5;"><br /> <span class="third-quart">XX</span>+</div>
+                                                <div class="maplegend" style="background-color:#6baed6;"><br /> to <span class="third-quart">XX</span></div>
+                                                <div class="maplegend" style="background-color:#bdd7e7;"><br /> to <span class="second-quart">XX</span></div>
+                                                <div class="maplegend-a" style="background-color:#eff3ff;"><br />0-<span class="first-quart">XX</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <!-- EDIT POINT Edit variable name, make sure your units are set in JS-->
+                                        <p class="exp-graf">
+                                            In <span class="exp-standout county">TKTK County</span>, this variable is <span class="exp-standout exp-highlight variable">TKTK units</span>. Here is a little additional information.
+                                        </p>
+                                    </div>
+                                    <div class="attr">
+                                        <!-- EDIT POINT Include attribution-->
+                                        Graphic by YOUR NAME
+                                    </div>
+                            </div>
+                            </div>
+                            <hr />
                         </div>
-                    </div>
-                    <div>
-                        <!-- EDIT POINT Edit variable name, make sure your units are set in JS-->
-                        <p class="exp-graf">
-                            In <span class="exp-standout county">TKTK County</span>, this variable is <span class="exp-standout exp-highlight variable">TKTK units</span>. Here is a little additional information.
-                        </p>
-                    </div>
-                    <div class="attr">
-                        <!-- EDIT POINT Include attribution-->
-                        Graphic by YOUR NAME
-                    </div>
-            </div>
-            </div>
-            <hr />
-        </div>
 
 				<p style="clear:both;">A basic, clean, responsive D3 map for applications and illustrations about the NC using county shapefiles.</p>
                 <p>Click a state and pull data from a related JSON file. This choropleth version colors counties according to predefined categories.</p>
