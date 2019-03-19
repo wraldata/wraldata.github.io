@@ -652,7 +652,7 @@ require(
             Copied = holdtext.createTextRange();
             Copied.execCommand("Copy");
         });
-        
+
         //establish a global variable
         //to store your data
         var loaded_data;
@@ -662,7 +662,7 @@ require(
         
         //EDIT POINT
         //provide a json url from Diesel to load in data
-        $.get('http://wraldata.github.io/data/abawd-rate.jso',function(data){
+        $.get('http://wraldata.github.io/data/abawd-rate.json',function(data){
             loaded_data = data;
             //EDIT POINT
             //Swap out 'abawd_rate' below with
