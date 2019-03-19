@@ -222,11 +222,20 @@
                     </div>
 
 				<p style="clear:both;">A basic, clean, responsive D3 map for applications and illustrations about the NC using county shapefiles.</p>
-                <p>Click a state and pull data from a related JSON file. This choropeth version colors counties according to predefined categories.</p>
-
+                <p>Click a state and pull data from a related JSON file. This choropleth version colors counties according to predefined categories.</p>
+                <p>Search the comments for EDIT POINT to quickly jump to the places you need to edit.</p>
 				<h4 style="margin-top:20px;" id="etag-top">Embed tag <button class="btn" id="etag-copy" data-clipboard-target="#etag">Copy this</button></h4>
 				<p><a href="#rjs-top">Jump to the RequireJS module</a></p>
                 <pre lang="html" id="etag">
+&lt;!--
+The following code, placed in the Embed Code 1 module
+in Diesel, will render a responsive choropleth map
+of North Carolina with every county represented
+
+TO EDIT
+Search the comments for EDIT POINT to quickly
+jump to the places you need to edit.
+-->
 &lt;style type="text/css">
 .nc_county {
     stroke: #fff;
@@ -255,27 +264,27 @@ svg {
     position: relative;
 }
 .maplegend {
-        border:0;
-        padding:0;
-        text-align: center;
-        font-size:12px;
-        float:right;
-        width:40px;
-        height:15px;
-        border-top:1px solid #a6a8ab;
-        border-bottom:1px solid #a6a8ab;
+    border:0;
+    padding:0;
+    text-align: center;
+    font-size:12px;
+    float:right;
+    width:40px;
+    height:15px;
+    border-top:1px solid #a6a8ab;
+    border-bottom:1px solid #a6a8ab;
 }
 .maplegend-a {
-        border:0;
-        padding:0;
-        text-align: center;
-        font-size:12px;
-        float:right;
-        width:40px;
-        height:15px;
-        border-top:1px solid #a6a8ab;
-        border-left:1px solid #a6a8ab;
-        border-bottom:1px solid #a6a8ab;
+    border:0;
+    padding:0;
+    text-align: center;
+    font-size:12px;
+    float:right;
+    width:40px;
+    height:15px;
+    border-top:1px solid #a6a8ab;
+    border-left:1px solid #a6a8ab;
+    border-bottom:1px solid #a6a8ab;
 }
 hr {
     margin-bottom:6px;
@@ -289,14 +298,22 @@ hr {
     padding:0px;
     clear:both;
 }
-.top-var{
-    font-weight:300;
-    margin-top:10px;
-    line-height: 120%;
-    color:#b7b7b7;
+.exp-graf {
+    font-size: 110%;
+    line-height: 180%;
+}
+.exp-standout {
+    font-weight: 800;
+    font-size: 120%;
+    white-space: nowrap;
+    color: #333;
+}
+.exp-highlight {
+    text-decoration: underline;
+    text-decoration-color: #3182bd;
 }
 &lt;/style>
-&lt;script src="http://d3js.org/topojson.v1.min.js">&lt;/script>
+&lt;script src="https://d3js.org/topojson.v1.min.js">&lt;/script>
 &lt;div style="clear:both;">
     &lt;hr />
     &lt;h4>Data by county&lt;/h4>
@@ -407,26 +424,30 @@ hr {
         &lt;h3 style="text-align:center;margin-top:40px;margin-bottom:10px;text-transform:uppercase;">Loading map&lt;/h3>
         &lt;img src="http://wwwcache.wral.com/presentation/v3/images/widgets/wait_popup/spinner.gif" style="width:31px;margin:auto;display:block;" />
     &lt;/div>
-    &lt;div id="map" style="margin-bottom:0px; display:none;">
-    &lt;/div>
-    &lt;div style="margin:0;">
-        &lt;div style="margin:0;padding-top:0px;display:block;">
-            &lt;div style="float:right;padding-bottom:30px;">
-                &lt;div style="text-align:center;text-transform:uppercase;font-size:12px;padding:0;">Legend&lt;/div>
-                &lt;div>
-                    &lt;div class="maplegend" style="background-color:#2171b5;">&lt;br />&nbsp;XX+&lt;/div>
-                    &lt;div class="maplegend" style="background-color:#6baed6;">&lt;br />&nbsp;to XX&lt;/div>
-                    &lt;div class="maplegend" style="background-color:#bdd7e7;">&lt;br />&nbsp;to XX&lt;/div>
-                    &lt;div class="maplegend-a" style="background-color:#eff3ff;">&lt;br />0-XX&lt;/div>
+    &lt;div id="map-data" style="display:none;">
+        &lt;div id="map" style="margin-bottom:0px;">&lt;/div>
+        &lt;div style="margin:0;">
+            &lt;div style="margin:0;padding-top:0px;display:block;">
+                &lt;div style="float:right;padding-bottom:30px;">
+                    &lt;div>
+                        &lt;div class="maplegend" style="background-color:#2171b5;">&lt;br /> &lt;span class="third-quart">XX&lt;/span>+&lt;/div>
+                        &lt;div class="maplegend" style="background-color:#6baed6;">&lt;br /> to &lt;span class="third-quart">XX&lt;/span>&lt;/div>
+                        &lt;div class="maplegend" style="background-color:#bdd7e7;">&lt;br /> to &lt;span class="second-quart">XX&lt;/span>&lt;/div>
+                        &lt;div class="maplegend-a" style="background-color:#eff3ff;">&lt;br />0-&lt;span class="first-quart">XX&lt;/span>&lt;/div>
+                    &lt;/div>
                 &lt;/div>
             &lt;/div>
-        &lt;/div>
-        &lt;div>
-            &lt;h4 class="top-var">Variable: &lt;span style="color:#333;">&lt;span id="variable">6.45&lt;/span>%&lt;/span>&lt;/h4>
-        &lt;/div>
-        &lt;div class="attr">
-            Graphic by YOUR NAME
-        &lt;/div>
+            &lt;div>
+                &lt;!-- EDIT POINT Edit variable name, make sure your units are set in JS-->
+                &lt;p class="exp-graf">
+                    In &lt;span class="exp-standout county">TKTK County&lt;/span>, this variable is &lt;span class="exp-standout exp-highlight variable">TKTK units&lt;/span>. Here is a little additional information.
+                &lt;/p>
+            &lt;/div>
+            &lt;div class="attr">
+                &lt;!-- EDIT POINT Include attribution-->
+                Graphic by YOUR NAME
+            &lt;/div>
+    &lt;/div>
     &lt;/div>
     &lt;hr />
 &lt;/div></pre>
@@ -434,18 +455,50 @@ hr {
 				<h4 style="margin-top:20px;" id="rjs-top">RequireJS Module <button class="btn" id="rjs-copy" data-clipboard-target="#rjs">Copy this </button></h4>
 				<p><a href="#etag-top">Jump to the Embed tag</a></p>
                 <pre id="rjs">
+/*
+The following code, placed in the RequireJS module
+in Diesel, will render a responsive choropleth map
+of North Carolina with every county represented
+
+By default, this code highlights Wake
+
+TO EDIT
+Search the comments for EDIT POINT to quickly
+jump to the places you need to edit.
+*/
+
 require(
-  ['jquery','lodash', 'http://d3js.org/d3.v3.min.js','http://d3js.org/topojson.v1.min.js'],
+  ['jquery',
+  'lodash', 
+  'https://d3js.org/d3.v3.min.js',
+  'https://d3js.org/topojson.v1.min.js'],
 
   function($, _) {
 
     //establish a global variable
-    var abawd_data;
+    //to store your data
+    var loaded_data;
+    //and the column name you want to grab
+    var variable_column;
+    var quartiles;
     
-    //provide a json url to load
-    //the rest of this code won't execute until this data is loaded
+    //EDIT POINT
+    //provide a json url from Diesel to load in data
     $.get('news/state/nccapitol/data_set/14943198/?dsi_id=abawd-rate&version=jsonObj',function(data){
-        abawd_data = data;
+        loaded_data = data;
+        //EDIT POINT
+        //Swap out 'abawd_rate' below with
+        //the relevant column name from your data
+        //that you want to display
+        variable_column = 'abawd_rate'
+
+        //and a quartile array for calculation
+        quartile_array = [];
+        for (i=0; i < loaded_data.length; i++){
+            quartile_array.push(loaded_data[i][variable_column]);
+        };
+        quartiles = calcQuartiles(quartile_array);
+        console.log(quartiles);
 
         //set initial height, width
         var width = 600,
@@ -479,7 +532,7 @@ require(
                 if(d.properties.NAME == "Wake"){return "nc_county " + d.properties.NAME + " selected"}
                 else{return "nc_county " + d.properties.NAME}
             })
-            .attr("id", function(d) {return d.properties.NAME.toUpperCase().split(' ').join('_')})
+            .attr("id", function(d) {return cleanName(d.properties.NAME)})
             .attr("d", path)
             .on("click", function(d) {
                 d3.selectAll(".selected").classed("selected", false);
@@ -490,48 +543,21 @@ require(
                 });
                 county = $(this).attr('id');
                 $('#county_select').val(county);
-                $('#variable').html(function(){
-                    for(i=0; i < abawd_data.length; i++){
-                        if(county == abawd_data[i]['county']){
-                            return abawd_data[i]['abawd_rate'];
-                        }
+                for(i=0; i < loaded_data.length; i++){
+                    if(county == cleanName(loaded_data[i]['county'])){
+                        //change the value of the variable parameter
+                        //EDIT POINT Set variable unit by replacing '%' below
+                        $('.variable').html(loaded_data[i][variable_column] + '%');
+                        //change the value of the county parameter
+                        $('.county').html(loaded_data[i]['county'].split('_').join(' ') + ' County');
                     }
-                });
+                }
             })
             parseData();
+            $('#WAKE').d3Click();
             $('.map-loading').css('display','none');
-            $('#map').css('display','block');
+            $('#map-data').css('display','block');
         });
-
-        //user-defined function to set choropeth colors
-        function parseData(){
-            for (j=0; j < abawd_data.length; j++){
-                variable = parseFloat(abawd_data[j]['abawd_rate']);
-                id_name = '#'+ abawd_data[j]['county'];
-                  switch (true){
-                    //for 0 to 1.72
-                    case (variable < 1.72178592 ):
-                      $(id_name).css('fill','#eff3ff');
-                      break;
-                    //for 1.72 to 2.36
-                    case (variable >= 1.72178592 && variable < 2.363903231 ):
-                      $(id_name).css('fill','#deebf7');
-                      break;
-                    //for 2.36 to 3.28
-                    case (variable >= 2.363903231 && variable < 3.28539106 ):
-                      $(id_name).css('fill','#9ecae1');
-                      break;
-                    //for 3.28 and above
-                    case (variable >= 3.28539106 ):
-                      $(id_name).css('fill','#3182bd');
-                      break;
-                    //if we get a funky value, alert us in the console
-                    default:
-                      console.log("ERROR: no color category")
-                      break;
-                  }
-            }
-        }
 
         //workaround for making sure path appears on top
         jQuery.fn.d3Click = function () {
@@ -547,22 +573,66 @@ require(
             e.preventDefault();
             //get the county selected in the dropdown
             county_display = $(this).val()
-            //find the index value of the county in our data
-            var i = 0;
-            while(abawd_data[i]['county'] != county_display){
-              i++;
-            }
             //reset all the county paths to remove the 'selected' class
             $('path').removeClass('selected');
             //add the selected class back to the specified county path
             $('#'+ county_display).addClass('selected');
             //change the value of the variable parameter
-            document.getElementById("variable").innerHTML = abawd_data[i]['abawd_rate'];
             //invoke d3 command for making sure path is properly shaded
             $('#'+county_display).d3Click();
         });
     });//END OF GET
-  }
+
+    //Function to set choropleth colors
+    function parseData(){
+        for (j=0; j < loaded_data.length; j++){
+            variable = parseFloat(loaded_data[j][variable_column]);
+            id_name = '#'+ cleanName(loaded_data[j]['county']);
+              switch (true){
+                //first quartile
+                case (variable <= quartiles[0] ):
+                  $(id_name).css('fill','#eff3ff');
+                  break;
+                //second quartile
+                case (variable > quartiles[0] && variable <= quartiles[1] ):
+                  $(id_name).css('fill','#bdd7e7');
+                  break;
+                //third quartile
+                case (variable > quartiles[1] && variable <= quartiles[2] ):
+                  $(id_name).css('fill','#6baed6');
+                  break;
+                //fourth quartile
+                case (variable > quartiles[2] ):
+                  $(id_name).css('fill','#2171b5');
+                  break;
+                //if we get a funky value, alert us in the console
+                default:
+                  console.log("ERROR: no color category")
+                  break;
+              }
+        }
+        //Alter the legend key
+        $('.first-quart').html(quartiles[0]);
+        $('.second-quart').html(quartiles[1]);
+        $('.third-quart').html(quartiles[2]);
+    }
+
+    //Utility function to calculate quartiles
+    function calcQuartiles(arr){
+        arr.sort();
+        len =  arr.length;
+        per25 =  Math.floor(len * 0.25) - 1;
+        per50 =  Math.floor(len * 0.5) - 1;
+        per75 =  Math.floor(len * 0.75) - 1;
+        return [arr[per25], arr[per50], arr[per75]];
+    }
+
+    //Utility function to clean county names by default
+    function cleanName(name){
+        return name.toUpperCase().split(' ').join('_');
+    }
+
+  }//END OF REQUIRE
 );</pre>
 			</div>
 		</div>
