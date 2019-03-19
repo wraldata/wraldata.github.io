@@ -702,7 +702,7 @@ require(
             .attr("viewBox","0 0 " + width + " " + height)
             .attr("preserveAspectRatio","xMinYMin");
 
-            d3.json("/news/state/data_set/14304699/?dsi_id=nc_counties&version=jsonObj", function(error, nc) {
+            d3.json("http://wraldata.github.io/data/nc-counties.json", function(error, nc) {
                 svg.selectAll(".nc_county")
                 .data(topojson.feature(nc, nc.objects.nc_counties).features)
                 .enter().append("path")
